@@ -10,7 +10,7 @@ namespace SimpleBlog.Areas.Admin.Controllers
     {
         public ActionResult Index()
         {
-            return Content("Users");
+            return Content("Users - 1");
         }
     }
 }
