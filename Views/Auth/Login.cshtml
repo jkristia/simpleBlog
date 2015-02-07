@@ -1,12 +1,31 @@
-﻿@{
+﻿@model SimpleBlog.ViewModels.AuthLogin
+@{
     ViewBag.Title = "Login";
 }
 
-<p>this is the login view</p>
+<p>This is the login view. The value of TestProp in our data is = @Model.TestProp</p>
 
-@section SCRIPTS
-    {
-    <script>
-        alert("hi")
-    </script>
+@using(Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <div>
+        @Html.LabelFor(x => x.Username)
+        @Html.EditorFor(x => x.Username)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Password)
+        @Html.EditorFor(x => x.Password)
+    </div>
+    <div>
+        <input type="submit" value="Login" />
+    </div>
+
 }
+
+<!-- 
+<form method="post">
+    <input type="text" name="Username" />
+    <input type="password" name="Password" />
+    <input type="submit" value="Login" />
+</form>
+    -->
