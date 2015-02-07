@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SimpleBlog - @ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="@Url.RouteUrl("Home")">Simple Blog</a>
+        </h1>
+        <a href="@Url.RouteUrl("login")">Login</a>
+    </header>
+    <!-- insert view here -->
+    @RenderBody()
+
+    <footer>
+        &copy; @DateTime.Now.Year - ABC
+    </footer>
+
+    <!-- this allows sub vies to define scripts, and the script will be run at the end of the html rendering -->
+    @RenderSection("SCRIPTS", false)
+</body>
+</html>

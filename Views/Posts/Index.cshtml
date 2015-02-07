@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Posts";
+}
+
+<h2>jk posts index</h2>
+@if (true)
+{
+    @:This line is not razor, but plain text
+    <p>
+        A html tag instructs razor to leave C# context until end of tag
+    </p>
+    <text>
+        <p>
+            This block is back to html
+        </p>
+    </text>
+}
+<p>
+    <a href="@Url.RouteUrl("login")">click here</a> to login
+</p>
+<p>
+    @Html.RouteLink("Click here", "login") to login
+</p>
