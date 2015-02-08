@@ -1,24 +1,27 @@
-﻿@{
-    Layout = null;
-}
+﻿@using System.Web.Optimization
+    @{
+        Layout = null;
+    }
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html>
-<head>
-    <title>SimpleBlog - @ViewBag.Title</title>
+    <html>
+    <head>
+        <title>SimpleBlog - @ViewBag.Title</title>
+        @Styles.Render("~/styles")
 </head>
 <body>
     <header>
         <h1>
             <a href="@Url.RouteUrl("Home")">Simple Blog</a>
+            <i class="glyphicon glyphicon-bell" ></i>
         </h1>
         @if (User.Identity.IsAuthenticated)
         {
             <p>Welcome back, @User.Identity.Name</p>
             <a href="@Url.RouteUrl("logout")">Logout</a>
             if (User.IsInRole("admin"))
-            { 
+            {
                 <a href="@Url.Action("index", "posts", new {area="admin"})">View Posts in admin</a>
             }
         }
@@ -34,7 +37,9 @@
         &copy; @DateTime.Now.Year - ABC
     </footer>
 
-    <!-- this allows sub vies to define scripts, and the script will be run at the end of the html rendering -->
+    <!-- load any scripts before the view -->
+    @Scripts.Render("~/scripts")
+    <!-- this allows sub views to define scripts, and the script will be run at the end of the html rendering -->
     @RenderSection("SCRIPTS", false)
 </body>
 </html>
