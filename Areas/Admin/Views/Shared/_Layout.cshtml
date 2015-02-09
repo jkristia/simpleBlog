@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+@helper SelectedTabClass(string tabName)
+{
+    if (tabName == ViewBag.SelectedTab)
+    {
+        @: active
+    }
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SimpleBlog Admin</title>
+    @System.Web.Optimization.Styles.Render("~/admin/styles")
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="@SelectedTabClass("posts")">
+                @Html.ActionLink("Posts", "Index", "Posts", new { area = "admin" }, null)
+            </li>
+            <li class="@SelectedTabClass("users")">
+                @Html.ActionLink("Users", "Index", "Users", new { area = "admin" }, null)
+            </li>
+            <li class="pull-right">
+                @Html.RouteLink("Back to Website", "Home")
+            </li>
+        </ul>
+        @RenderBody()
+    </div>
+    @System.Web.Optimization.Scripts.Render("~/admin/scripts")
+    @RenderSection("Scripts", false)
+</body>
+</html>
