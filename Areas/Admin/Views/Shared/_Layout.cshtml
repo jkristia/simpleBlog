@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Web.Optimization
+@using mvc = System.Web.Mvc
+@{
     Layout = null;
 }
 
@@ -16,7 +18,7 @@
 <html>
 <head>
     <title>SimpleBlog Admin</title>
-    @System.Web.Optimization.Styles.Render("~/admin/styles")
+    @Styles.Render("~/admin/styles")
 </head>
 <body>
     <header></header>
@@ -34,7 +36,7 @@
         </ul>
         @RenderBody()
     </div>
-    @System.Web.Optimization.Scripts.Render("~/admin/scripts")
+    @Scripts.Render("~/admin/scripts")
     @RenderSection("Scripts", false)
 </body>
 </html>
