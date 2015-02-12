@@ -24,7 +24,8 @@ namespace SimpleBlog.Areas.Admin.Controllers
 		{
 			return View(new UsersNew {});
 		}
-		[HttpPost]
+		
+		[HttpPost, ValidateAntiForgeryToken]
 		public ActionResult New(UsersNew newuser)
 		{
 			if (Database.Session.Query<User>().Any(u => u.Username == newuser.Username))
@@ -52,7 +53,8 @@ namespace SimpleBlog.Areas.Admin.Controllers
 				Email = user.Email
 			});
 		}
-		[HttpPost]
+		
+		[HttpPost, ValidateAntiForgeryToken]
 		public ActionResult Edit(int id, UsersEdit form)
 		{
 			User user = Database.Session.Load<User>(id);
@@ -80,7 +82,8 @@ namespace SimpleBlog.Areas.Admin.Controllers
 				Username = user.Username,
 			});
 		}
-		[HttpPost]
+		
+		[HttpPost, ValidateAntiForgeryToken]
 		public ActionResult ResetPassword(int id, UsersResetPassword form)
 		{
 			User user = Database.Session.Load<User>(id);
@@ -96,7 +99,8 @@ namespace SimpleBlog.Areas.Admin.Controllers
 			Database.Session.Update(user);
 			return RedirectToAction("index");
 		}
-		[HttpPost]
+		
+		[HttpPost, ValidateAntiForgeryToken]
 		public ActionResult Delete(int id)
 		{
 			User user = Database.Session.Load<User>(id);
