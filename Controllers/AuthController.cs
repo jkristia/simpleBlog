@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using SimpleBlog.Models;
 using SimpleBlog.ViewModels;
+using NHibernate.Linq;
 
 namespace SimpleBlog.Controllers
 {
@@ -27,21 +29,17 @@ namespace SimpleBlog.Controllers
 		[HttpPost]
 		public ActionResult Login(AuthLogin login, string returnUrl)
 		{
+			User user = Database.Session.Query<User>().FirstOrDefault( u => u.Username == login.Username);
+			if (user == null)
+				SimpleBlog.Models.User.FakeHash();
+
+			if (user == null || user.CheckPassword(login.Password) == false)
+				ModelState.AddModelError("Username", "Username or password is incorrect!");
+
 			if (ModelState.IsValid == false)
-			{ 
-				login.TestProp = "NOT VALID";
 				return View(login);
-			}
-			/*
-			if (login.Username != "jesper")
-			{
-				ModelState.AddModelError("Username", "Username or password incorrect");
-				return View(login);
-			}
-			*/
-			// Authentication - this tells ASP.NET that the user is really the user
-			// Authorization - this is done in the Role provider, and returns the roles for a given user. 
-			FormsAuthentication.SetAuthCookie(login.Username, true);
+
+			FormsAuthentication.SetAuthCookie(user.Username, true);
 
 			if (string.IsNullOrWhiteSpace(returnUrl) == false)
 				return Redirect(returnUrl);
