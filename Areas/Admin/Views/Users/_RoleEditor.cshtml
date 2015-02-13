@@ -1,0 +1,21 @@
+﻿@model IList<SimpleBlog.Areas.Admin.ViewModels.RoleCheckbox>
+
+<!-- partial view -->
+<div class="panel panel-default">
+    <div class="panel-heading">Roles</div>
+    <div class="panel-body">
+        <ul class="list-group">
+            @for (var index = 0; index < Model.Count; index++)
+            {
+                <li class="list-group-item">
+                    @Html.Hidden("Roles[" + index + "].Id", Model[index].Id)
+                    <lable for="Roles_@(index)__IsChecked">
+                        @Html.CheckBox("Roles[" + index + "].IsChecked", Model[index].IsChecked)
+                        @Model[index].Name
+                    </lable>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
