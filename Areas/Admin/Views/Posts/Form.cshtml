@@ -19,7 +19,8 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(f => f.Slug);
-                @Html.TextBoxFor(f => f.Slug, new { @class = "form-control" })
+                <!-- notice underscore _ is translated into dash - -->
+                @Html.TextBoxFor(f => f.Slug, new { @class = "form-control", data_slug="#Title"})
             </div>
             <div class="form-group">
                 @Html.LabelFor(f => f.Content);
