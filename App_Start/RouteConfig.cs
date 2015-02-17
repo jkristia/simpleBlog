@@ -16,6 +16,13 @@ namespace SimpleBlog
 			
 			// this to point to a specific Posts controller
 			string[] namespaces = new string[] {typeof(PostsController).Namespace};
+			
+			routes.MapRoute("TagWorkAround", "tag/{idAndSlug}", new { controller = "Posts", action = "Tag"}, namespaces);
+			routes.MapRoute("Tag", "tag/{id}-{slug}", new { controller = "Posts", action = "Tag"}, namespaces);
+			
+			routes.MapRoute("PostWorkAround", "post/{idAndSlug}", new { controller = "Posts", action = "Show"}, namespaces);
+			routes.MapRoute("Post", "post/{id}-{slug}", new { controller = "Posts", action = "Show"}, namespaces);
+			
 			routes.MapRoute("Login", "login", new {controller = "Auth", action = "Login"}, namespaces);
 			routes.MapRoute("Logout", "logout", new {controller = "Auth", action = "Logout"}, namespaces);
 			routes.MapRoute("Home", "", new {controller = "Posts", action = "Index"}, namespaces);
