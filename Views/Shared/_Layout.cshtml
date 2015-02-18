@@ -7,40 +7,37 @@
 
 <html>
 <head>
+    <meta charset="utf-8" />
     <title>SimpleBlog - @ViewBag.Title</title>
     @Styles.Render("~/styles")
 </head>
 <body>
-    <header>
-        <h1>
-            <a href="@Url.RouteUrl("Home")">Simple Blog</a>
-            <i class="glyphicon glyphicon-bell"></i>
-        </h1>
-        @if (User.Identity.IsAuthenticated)
-        {
-            <p>Welcome back, @User.Identity.Name</p>
-            <a href="@Url.RouteUrl("logout")">Logout</a>
-            if (User.IsInRole("admin"))
-            {
-                <a href="@Url.Action("index", "posts", new {area="admin"})">View Posts in admin</a>
-            }
-        }
-        else
-        {
-            <a href="@Url.RouteUrl("login")">Login</a>
-        }
+    <div class="site-header">
+        <header class="container">
+            <h1 class="page-header">
+                <a href="@Url.RouteUrl("Home")">Awesome Stuff!</a>
+                <small>a simple blog powered by ASP.Net MVC</small>
+            </h1>
+        </header>
+    </div>
 
-    </header>
-    <!-- insert view here -->
-    @RenderBody()
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                @RenderBody()
+            </div>
+            <div class="col-lg-4 sidebar">
+                <!-- call action on controller to inject a view-->
+                <!-- need to add route -->
+                @Html.Action("Sidebar", "Layout")
+            </div>
+        </div>
 
-    <footer>
-        &copy; @DateTime.Now.Year - ABC
-    </footer>
-
-    <!-- load any scripts before the view -->
-    @Scripts.Render("~/scripts")
-    <!-- this allows sub views to define scripts, and the script will be run at the end of the html rendering -->
-    @RenderSection("SCRIPTS", false)
+        <footer>
+            &copy; @DateTime.UtcNow.Year
+        </footer>
+    </div>
+    @Styles.Render("~/styles")
+    @RenderSection("Scripts", false)
 </body>
 </html>
