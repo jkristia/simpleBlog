@@ -8,6 +8,9 @@ using SimpleBlog.Models;
 using NHibernate.Linq;
 using SimpleBlog.Areas.Admin.ViewModels;
 
+/*
+this is created in a branch
+*/
 namespace SimpleBlog.Areas.Admin.Controllers
 {
 	[Authorize(Roles = "admin")]
